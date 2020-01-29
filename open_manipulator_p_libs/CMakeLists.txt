@@ -49,10 +49,11 @@ include_directories(
 )
 
 add_library(open_manipulator_p_libs
-  src/open_manipulator_p.cpp
+  # src/open_manipulator_p.cpp # Avoid conflict with bir_open_manipulator_p.cpp
   src/custom_trajectory.cpp
   src/dynamixel.cpp
   src/kinematics.cpp
+  src/bir_open_manipulator_p.cpp
 )
 add_dependencies(open_manipulator_p_libs ${catkin_EXPORTED_TARGETS})
 target_link_libraries(open_manipulator_p_libs  ${catkin_LIBRARIES} ${Eigen3_LIBRARIES})
