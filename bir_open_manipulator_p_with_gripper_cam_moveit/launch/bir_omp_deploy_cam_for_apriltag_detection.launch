@@ -1,9 +1,13 @@
 <launch>   
     <!-- Teledyne Connection-->
     <include file="$(find def_cam_teledyne_nano)/launch/camera_example.launch"/>
-
+    
     <!-- Apriltag detector-->
-    <include file="$(find apriltag_ros)/launch/continuous_detection.launch"/>
+    <include file="$(find apriltag_ros)/launch/continuous_detection.launch">
+        <arg name="camera_name" default="/dyn_ef_robot/camera1/" />
+        <arg name="camera_frame" default="camera1" />
+        <arg name="image_topic" default="image_raw" />
+    </include>
  
     <!-- Apriltag Detection image view -->
     <node name="apriltag_image_view" pkg="image_view" type="image_view" output="screen">
