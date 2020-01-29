@@ -212,7 +212,7 @@ void OpenManipulator::initOpenManipulator(bool using_actual_robot_state, STRING 
       addToolActuator(TOOL_DYNAMIXEL, tool_, gripperDxlId, p_dxl_comm_arg);
 
       // Set gripper actuator control mode
-      STRING gripper_dxl_mode_arg = "current_based_position_mode";
+      STRING gripper_dxl_mode_arg = "position_mode";
       void *p_gripper_dxl_mode_arg = &gripper_dxl_mode_arg;
       setToolActuatorMode(TOOL_DYNAMIXEL, p_gripper_dxl_mode_arg);
 
