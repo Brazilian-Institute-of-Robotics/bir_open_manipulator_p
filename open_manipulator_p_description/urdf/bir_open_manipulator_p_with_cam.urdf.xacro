@@ -183,7 +183,7 @@
   <joint name="joint3" type="revolute">
     <parent link="link3"/>
     <child link="link4"/>
-    <origin xyz="0.03000 0.0 0.26400" rpy="0 0 0"/>
+    <origin xyz="0.03000 0.0 0.26400" rpy="0 -0.7854 0"/>
     <axis xyz="0 1 0"/>
     <limit velocity="0.31415" effort="1000" lower="${-pi*60/180}" upper="${pi*120/180}" />
     <dynamics damping="0.7"/>
@@ -346,14 +346,14 @@
     <collision>
       <origin xyz="0 0 1.557" rpy="0 0 0"/>
       <geometry>
-        <mesh filename="package://open_manipulator_pro_description/meshes/bir_camera_with_base_lens.dae"/>
+        <mesh filename="package://open_manipulator_p_description/meshes/bir_camera_with_base_lens.dae"/>
       </geometry>
     </collision>
 
     <visual>
       <origin rpy="0 0 1.557" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://open_manipulator_pro_description/meshes/bir_camera_with_base_lens.dae"/>
+        <mesh filename="package://open_manipulator_p_description/meshes/bir_camera_with_base_lens.dae"/>
       </geometry>
     </visual>
 
