@@ -20,7 +20,7 @@ END_CONDITION = 0.20                            # END CONDITION FOR SEARCHING
 SEQ_FRAMES = 15                                # HOW MANY FRAME DO YOU NEED TO COUNT TO FIND THE DESIRED TAG
 JOINTS_TOLERANCE = 0.05
 
-class openManipulator:
+class openManipulatorBIR:
     def __init__(self):
         # ROS NODE INIT
         rospy.init_node('apriltag_detector_go2goal_gripper', anonymous=True)        
@@ -40,11 +40,11 @@ class openManipulator:
         self.gripper_msg.joint_name = ['gripper']
         self.gripper_msg.max_accelerations_scaling_factor = 0.1
         self.gripper_msg.max_velocity_scaling_factor = 0.5
-        self.gripper_msg.position = [2]                      # START OPEN                                                    
+        self.gripper_msg.position = [2]                                   # START OPEN                                                    
         # DEFINE MOVEIT PARAMETERS
         self.group.set_goal_position_tolerance(JOINTS_TOLERANCE)          # GOAL TOLERANCE
         self.group.set_max_velocity_scaling_factor(0.1)                   # MAX SPEED FACTOR
-        self.group.set_planning_time(5)                      # TIME TO PLANNING
+        self.group.set_planning_time(5)                                   # TIME TO PLANNING
         # DEFINE TAG SEARCH AUX
         self.id_found = 0                                    # FOUND TAG
         self.seq_counts = 0                                  # SEQ COUNTS THAT THE RBG GET THE FRAME
@@ -70,7 +70,7 @@ class openManipulator:
             if stopCondition == numberOfJoints:
                 self.group.stop()
                 self.group.clear_pose_targets()
-                rospy.sleep(2)
+                rospy.sleep(1)
                 break
     
     # FUNCTION - MOVE JOINT
@@ -194,11 +194,11 @@ class openManipulator:
 if __name__ == '__main__':
     try:
         # INITIALIZE YOUR OBJECT
-        omanip = openManipulator()
+        omanip = openManipulatorBIR()
         # INITIALIZE THE OPERATION BY CLICKING ENTER
         raw_input("Press Enter to start!")
         # OPERATION
-        omanip.process()  
+        omanip.process2()  
 
     except rospy.ROSInterruptException:
         pass

@@ -24,7 +24,31 @@
         <joint name="joint3" value="0" />
         <joint name="joint4" value="0" />
         <joint name="joint5" value="0" />
-        <joint name="joint6" value="0" />
+        <joint name="joint6" value="-0.87" />
+    </group_state>
+    <group_state name="pSearch" group="arm">
+        <joint name="joint1" value="0" />
+        <joint name="joint2" value="0" />
+        <joint name="joint3" value="0.7854" />
+        <joint name="joint4" value="0" />
+        <joint name="joint5" value="0" />
+        <joint name="joint6" value="-0.87" />
+    </group_state>
+    <group_state name="pTarget" group="arm">
+        <joint name="joint1" value="-0.7376" />
+        <joint name="joint2" value="-0.675" />
+        <joint name="joint3" value="1.5707" />
+        <joint name="joint4" value="0" />
+        <joint name="joint5" value="0" />
+        <joint name="joint6" value="-0.87" />
+    </group_state>
+    <group_state name="pSleep" group="arm">
+        <joint name="joint1" value="-3.0543" />
+        <joint name="joint2" value="1.5707" />
+        <joint name="joint3" value="-0.6545" />
+        <joint name="joint4" value="0" />
+        <joint name="joint5" value="0" />
+        <joint name="joint6" value="-0.366519" />
     </group_state>
     <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
     <disable_collisions link1="camera_link" link2="end_link" reason="Never" />

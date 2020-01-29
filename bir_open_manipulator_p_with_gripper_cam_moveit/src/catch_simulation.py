@@ -41,6 +41,18 @@ class openManipulator:
         self.group.set_max_velocity_scaling_factor(1)        # MAX SPEED FACTOR
         self.group.set_planning_time(5)                      # TIME TO PLANNING
 
+    # FUNCTION - GO TO SPECIFIC POSE
+    def go_to_pose(self, pose_name):
+        ## WE CAN PLAN AND EXECUTE A MOTION FOR THIS GROUP TO A DESIRED SAVED POSE FOR THE END-EFF
+        # 1 - PASS YOUR POSE SAVED ON SETUP ASSISTANT
+        self.group.set_named_target(pose_name)
+        # 2 - PLAN AND EXECUTE
+        self.group.go()
+        # 3 - PREVENT RESIDUAL MOVEMENT
+        self.group.stop()
+        # 4 - CLEAR TARGET GOAL
+        self.group.clear_pose_targets()
+        
     # FUNCTION - SET TARGET & GO WITH PREVENTION
     def security_sequential_execution2(self, pose_name):
         if not rospy.is_shutdown():
