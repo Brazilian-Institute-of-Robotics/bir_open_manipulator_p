@@ -1,10 +1,10 @@
 <launch>
-  <arg name="robot_name"              default="open_manipulator_pro"/>
+  <arg name="robot_name"              default="open_manipulator_p"/>
   <arg name="sample_duration"         default="0.010"/>
   <arg name="with_gripper"            default="false"/>
   <arg name="debug"                   default="false" />
-  <arg name="moveit_package"          default="open_manipulator_pro_with_camera_moveit"/>
-  <arg name="moveit_gripper_package"  default="open_manipulator_pro_with_camera_gripper_moveit"/>
+  <arg name="moveit_package"          default="bir_open_manipulator_p_with_cam_moveit"/>
+  <arg name="moveit_gripper_package"  default="bir_open_manipulator_p_with_gripper_cam_moveit"/>
   <arg name="use_rviz"                default="false"/>
 
   <!-- We do not have a robot connected, so publish fake joint states -->
