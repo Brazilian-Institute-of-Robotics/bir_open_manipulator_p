@@ -4,7 +4,7 @@
     
     <!-- Apriltag detector-->
     <include file="$(find apriltag_ros)/launch/continuous_detection.launch">
-        <arg name="camera_name" default="/dyn_ef_robot/camera1/" />
+        <arg name="camera_name" default="/dyn_ef_robot/camera1" />
         <arg name="camera_frame" default="camera1" />
         <arg name="image_topic" default="image_raw" />
     </include>

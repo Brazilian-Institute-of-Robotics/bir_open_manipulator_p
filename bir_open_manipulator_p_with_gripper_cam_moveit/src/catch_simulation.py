@@ -37,9 +37,6 @@ class openManipulator:
         # TAG DETECTION INIT
         self.tag_id_subscriber = rospy.Subscriber('/tag_detections', AprilTagDetectionArray,self.callback)
         # DEFINE MOVEIT PARAMETERS
-        self.group.set_goal_position_tolerance(0.5)          # GOAL TOLERANCE
-        self.group.set_max_velocity_scaling_factor(1)        # MAX SPEED FACTOR
-        self.group.set_planning_time(5)                      # TIME TO PLANNING
 
     # FUNCTION - GO TO SPECIFIC POSE
     def go_to_pose(self, pose_name):
@@ -159,7 +156,6 @@ class openManipulator:
     # AUXILIAR FUNCTION FOR SEVERAL TESTS
     def process2(self):
         self.go_to_pose('pHome')
-        rospy.sleep(15)
         self.go_to_pose('pSearch')
 
 
@@ -170,7 +166,7 @@ if __name__ == '__main__':
         # INITIALIZE THE OPERATION BY CLICKING ENTER
         raw_input("Press Enter to start!")
         # OPERATION
-        omanip.process()  
+        omanip.process2()  
 
     except rospy.ROSInterruptException:
         pass

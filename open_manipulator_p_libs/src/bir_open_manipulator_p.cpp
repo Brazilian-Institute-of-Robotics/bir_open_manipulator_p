@@ -75,7 +75,7 @@ void OpenManipulator::initOpenManipulator(bool using_actual_robot_state, STRING 
             "joint2",  // parent name
             "joint4",  // child name
             math::vector3(0.030, 0.0, 0.264),                // relative position
-            math::convertRPYToRotationMatrix(0.0, -0.7854, 0.0), // relative orientation
+            math::convertRPYToRotationMatrix(0.0, 0, 0.0), // relative orientation
             Y_AXIS,    // axis of rotation
             3,         // actuator id
             2.0944,      // max joint limit (rad)

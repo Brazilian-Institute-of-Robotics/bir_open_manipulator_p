@@ -13,66 +13,59 @@ from moveit_commander.conversions import pose_to_list
 class openManipulator:
     def __init__(self):
         # ROS NODE INIT
-        rospy.init_node('apriltag_detector_go2goal', anonymous=True)        
+        rospy.init_node('apriltag_detector_go2goal')        
         # MOVEIT INIT
         moveit_commander.roscpp_initialize(sys.argv)
         self.robot = moveit_commander.RobotCommander()
         self.scene = moveit_commander.PlanningSceneInterface()
-        self.group_name = "arm"
-        self.group = moveit_commander.MoveGroupCommander(self.group_name)
-        self.display_trajectory_publisher = rospy.Publisher('/move_group/display_planned_path',
-                                                            moveit_msgs.msg.DisplayTrajectory,
-                                                            queue_size=20)
-        self.tag_id_subscriber = rospy.Subscriber('/tag_detections',
-                                                  AprilTagDetectionArray,self.callback)
-        # DEFINE PARAMETERS
+        self.group = moveit_commander.MoveGroupCommander("arm")
+        #self.display_trajectory_publisher = rospy.Publisher('/move_group/display_planned_path',
+        #                                                    moveit_msgs.msg.DisplayTrajectory,
+        #                                                    queue_size=20)
+        self.tag_id_subscriber = rospy.Subscriber('/tag_detections', AprilTagDetectionArray,self.callback)
+        # MOVEIT RESTRICTIONS
         self.group.set_goal_position_tolerance(0.1)          # GOAL TOLERANCE
         self.group.set_planning_time(5)                      # TIME TO PLANNING
-        # AUX VARS
+        # CODE PARAMETERS
+        self.rotate_degree = -pi*10/180       
+        self.limit_j1 = -pi
+        self.position_tolerance = 0.05
+        # MOVEIT RESTRICTIONS
+        self.group.set_goal_position_tolerance(self.position_tolerance)     # GOAL TOLERANCE
+        self.group.set_planning_time(5)                                     # TIME TO PLANNING
+        # TAG DETECTION VARS
         self.id_found = 0                                    # FOUND TAG
         self.seq_counts = 0                                  # SEQ COUNTS THAT THE RBG GET THE FRAME
-        self.rotate_degree = pi*10/180                       # ROTATE 10 DEGREES
+        self.MAX_SEQS = 25                                   # SEQ TO DETECT TAG
 
-
-    # FUNCTION - GO TO SPECIFIC POSE
+    # FUNCTION - PLAN AND EXECUTE A MOTION FOR THIS GROUP TO A DESIRED SAVED POSE FOR THE END-EFF
     def go_to_pose(self, pose_name):
-        ## WE CAN PLAN AND EXECUTE A MOTION FOR THIS GROUP TO A DESIRED SAVED POSE FOR THE END-EFF
-        # 1 - PASS YOUR POSE SAVED ON SETUP ASSISTANT
+        #  PASS YOUR POSE SAVED ON SETUP ASSISTANT
         self.group.set_named_target(pose_name)
-        # 2 - PLAN AND EXECUTE
-        self.group.go()
-        # 3 - PREVENT RESIDUAL MOVEMENT
+        # PLAN AND EXECUTE
+        self.group.go(wait=True)
+        # PREVENT RESIDUAL MOVEMENT
         self.group.stop()
-        # 4 - CLEAR TARGET GOAL
+        # CLEAR TARGET GOAL
         self.group.clear_pose_targets()
 
-    # FUNCTION - SET JOINTS
-    def rotate_joint1(self,sense):
-        # 1 - DEFINE A VARIABLE FORMAT EQUIVALENT TO JOINTS
+    # FUNCTION - SET JOINTS ACTUAL - TARGET
+    def rotateJ1(self):
+        # DEFINE A VARIABLE FORMAT EQUIVALENT TO JOINTS STATES
         joint_goal = self.group.get_current_joint_values()
-        # 2 - DECISION :: FINISH THE NODE IF JOINT ANGLE IS CLOSE TO PATH END (-90 DEGREES)
-        if abs(abs(joint_goal[0]) - abs(-pi/2)) < 0.1:
+        # DECISION :: FINISH THE NODE IF JOINT ANGLE IS CLOSE TO PATH END
+        if abs(joint_goal[0] - self.limit_j1) < 0.1:
             # 2.1 - BEFORE END NODE, SEND TO pSearch
-            rospy.loginfo('############# GO TO SEARCH POSE, INIT SLEEP MODE')
-            self.go_to_pose('pSearch')
-            rospy.loginfo('############# GO TO SLEEP')
-            self.go_to_pose('pSleep')
+            rospy.loginfo('############# GO TO PHOME, MAX LIMIT IN SEARCH')
+            self.go_to_pose('pHome')
             sys.exit()
 
-        # 3 - MOVE MANIPULATOR BASED ON SENSE PARAMETER :: ClockWise
-        if sense == 'cw':
-            # 3.1 - INSERT DESIRED ANGLE
-            joint_goal[0] = joint_goal[0] - self.rotate_degree
-            # 3.2 - ANALYZE IF THE DESIRED ANGLE IS HIGHER THAN THE PATH END (-90 DEGREES)
-            if abs(joint_goal[0]) > abs(-pi/2):
-                joint_goal[0] = -pi/2
-        # 4 - MOVE MANIPULATOR BASED ON SENSE PARAMETER :: Anti ClockWise     
-        else:
-            pass
+        # MOVE MANIPULATOR BASED ON SENSE PARAMETER
+        joint_goal[0] = joint_goal[0] + self.rotate_degree
         # 5 - GO!
         self.group.go(joints=joint_goal, wait=True)
         # 6 - Print Joint state
-        rospy.loginfo('joint0 '+str(round(joint_goal[0]*180/pi,1))+' degrees'+' | '+ str(joint_goal[0])+' rad')
+        rospy.loginfo('J1 '+str(round(joint_goal[0]*180/pi,1))+' degrees'+' | '+ str(joint_goal[0])+' rad')
         # 7 - STOP  ANY RESIDUAL MOVEMENT
         self.group.stop()
         # 8 - CLEAR TARGET GOAL
@@ -80,15 +73,14 @@ class openManipulator:
 
     # FUNCTION - CALLBACK
     def callback(self,data):
-        if self.id_found is not 1:
-            if len(data.detections) is not 0:
-                if data.detections[0].id[0] == 1:
-                    self.seq_counts = self.seq_counts + 1
-                else:
-                    self.seq_counts = 0
+        if (self.id_found is not 1) and (len(data.detections) is not 0):
+            if data.detections[0].id[0] == 1:
+                self.seq_counts = self.seq_counts + 1
+            else:
+                self.seq_counts = 0
         
-                if self.seq_counts == 20:
-                    self.id_found = 1
+            if self.seq_counts == self.MAX_SEQS:
+                self.id_found = 1
         else:
             pass
 
@@ -103,22 +95,19 @@ class openManipulator:
         self.id_found = 0                                 
         # STEP 3 - KEEP ROTATING
         while not rospy.is_shutdown():
-            # PRINT TAG ID
-            # 3.1 - IF TAG WAS NOT FOUND, ROTATE
+            # IF TAG WAS NOT FOUND, ROTATE
             if self.id_found is 0:
-                self.rotate_joint1(sense='cw')
+                self.rotateJ1()
                 rospy.loginfo('############# ROTATION COMPLETE')
                 
-            # 3.2 - IF TAG WAS FOUND, GO TO TARGET POSITION
-            if self.id_found is 1:
+            # IF TAG WAS FOUND, GO TO TARGET POSITION
+            elif self.id_found is 1:
                 rospy.loginfo('############# TAG FOUND')
                 self.go_to_pose('pTarget')
-                rospy.loginfo('############# RESTART ROUTINE')
-                # GO TO pSEARCH
-                self.go_to_pose('pSearch') 
-                # RESET VARS
-                self.id_found = 0
-                self.seq_counts = 0
+                rospy.loginfo('############# FINISHING, GO TO HOME')
+                self.go_to_pose('pHome')
+                sys.exit()
+
                    
 
 if __name__ == '__main__':

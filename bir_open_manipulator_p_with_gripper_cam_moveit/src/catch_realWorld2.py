@@ -27,9 +27,22 @@ class openManipulatorPRO:
         moveit_commander.roscpp_initialize(sys.argv)
         self.robot = moveit_commander.RobotCommander()
         self.scene = moveit_commander.PlanningSceneInterface()
-        self.group = moveit_commander.MoveGroupCommander("arm")                                            
+        self.group = moveit_commander.MoveGroupCommander("arm")
+        # GRIPPER SERVICE INIT
+        rospy.wait_for_service('/open_manipulator_p/goal_tool_control') 
+        self.gripper_commander = rospy.ServiceProxy('/open_manipulator_p/goal_tool_control',SetJointPosition)   
+        self.gripper_msg = JointPosition()
+        self.gripper_msg.joint_name = ['gripper']
+        self.gripper_msg.max_accelerations_scaling_factor = 0.1
+        self.gripper_msg.max_velocity_scaling_factor = 0.5
+        self.gripper_msg.position = [2]                                               
         # TAG DETECTION - INIT
         self.tag_id_subscriber = rospy.Subscriber('/tag_detections', AprilTagDetectionArray, self.tagCB)
+
+    # FUNCTION - COMMAND GRIPPER
+    def set_gripper(self, positionValue):
+        self.gripper_msg.position = [positionValue]
+        self.gripper_commander('arm', self.gripper_msg, 5.0)
 
     # FUNCTION - CALLBACK
     def tagCB(self,data):
@@ -110,10 +123,11 @@ class openManipulatorPRO:
                     break
 
     # FUNCTION - PROCESS ROUTINE
-    def detect_routine(self):
-        ## STEP 0 - GO TO HOME
-        self.go_to_pose_sequential_execution(pose_name='pHome')
-        ## STEP 1 - GO TO SEARCH HEIGTH ZONE
+    def detect_and_get_routine(self):
+        ## STEP 1 - OPEN GRIPPER
+        self.set_gripper(2)
+        rospy.sleep(0.5)
+        ## STEP 2 - GO TO SEARCH HEIGTH ZONE
         self.go_to_pose_sequential_execution(pose_name='pSearch')
         ## START TAG VARIABLES
         self.tag_found = 0
@@ -128,24 +142,42 @@ class openManipulatorPRO:
             elif self.tag_found is 1:
                 rospy.loginfo('############# TAG FOUND')
                 # GO TO CATCH POSITION
-                self.go_to_pose_sequential_execution(pose_name='pTarget')
+                self.go_to_pose_sequential_execution(pose_name='pCatch')
+                # PREPARE TO CATCH
+                self.go_to_pose_sequential_execution(pose_name='pCatchBottle')
+                # CATCH WITH GRIPPER
+                self.set_gripper(0.8)
                 rospy.sleep(0.5)
-                self.go_to_pose_sequential_execution(pose_name='pHome')                
+                # GO TO PSEARCH
+                self.move_joint_sequential_execution(jointID=3, jointValueDegree=40)
+                self.go_to_pose_sequential_execution(pose_name='pSearch')
+                ## STEP 1 - OPEN GRIPPER
+                self.set_gripper(2)
+                rospy.sleep(0.5)                
                 # FINISH PROGRAM
                 sys.exit()   
 
     # AUXILIAR FUNCTION FOR SEVERAL TESTS
     def test_routine(self):
-        self.go_to_pose_sequential_execution(pose_name='pHome')
+        self.set_gripper(2)
+        rospy.sleep(0.5)
+        #self.go_to_pose_sequential_execution(pose_name='pHome')
+        #self.go_to_pose_sequential_execution(pose_name='pSearch')
+        self.go_to_pose_sequential_execution(pose_name='pCatch')
+        self.go_to_pose_sequential_execution(pose_name='pCatchBottle')
+        self.set_gripper(0.8)
+        rospy.sleep(0.5)
+        self.move_joint_sequential_execution(jointID=3, jointValueDegree=40)
         self.go_to_pose_sequential_execution(pose_name='pSearch')
- 
+        self.set_gripper(2)
+        rospy.sleep(0.5)        
 
 if __name__ == '__main__':
     try:
         # INITIALIZE YOUR OBJECT
         omanip = openManipulatorPRO()
         # OPERATION
-        omanip.detect_routine()  
+        omanip.detect_and_get_routine()  
 
     except rospy.ROSInterruptException:
         pass
