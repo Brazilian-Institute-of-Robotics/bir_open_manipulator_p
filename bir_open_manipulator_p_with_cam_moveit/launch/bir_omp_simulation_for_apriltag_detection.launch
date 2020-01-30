@@ -5,7 +5,7 @@
     <include file="$(find bir_open_manipulator_p_with_cam_moveit)/launch/bir_omp_moveit_planning_execution.launch"/>
     <!-- Launch Tag Detector -->
     <include file="$(find apriltag_ros)/launch/continuous_detection.launch">
-        <arg name="camera_name" value="/open_manipulator_p/camera1" />
+        <arg name="camera_name" value="/open_manipulator_p/camera1/" />
         <arg name="image_topic" default="image_raw" />
         <arg name="camera_frame" value="camera1" />
     </include>
