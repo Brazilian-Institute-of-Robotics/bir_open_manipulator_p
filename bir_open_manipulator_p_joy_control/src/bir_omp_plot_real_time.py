@@ -2,7 +2,7 @@
 import rospy
 import numpy as np
 from math import pi as PI
-import omp_joystick_simulation as ompJS
+import bir_omp_joystick_simulation as ompJS
 import matplotlib.pyplot as plt                 # Plot library
 from matplotlib.animation import FuncAnimation  # Animation module
 from itertools import count                     # Count Time
@@ -32,7 +32,7 @@ class RealTimePlot():
         # SUBSCRIBER - for JOY COMMANDS
         self.sub = rospy.Subscriber('/joy', Joy, self.communicate.callback, queue_size=10)
         # SUBSCRIBER - for JOINT STATES
-        self.subJS = rospy.Subscriber('/open_manipulator_pro/joint_states', JointState, self.communicate.callbackJS, queue_size=10)
+        self.subJS = rospy.Subscriber('/open_manipulator_p/joint_states', JointState, self.communicate.callbackJS, queue_size=10)
 
     # FUNCTION - RETURN JOINT STATES in BOOLEAN VALUE
     def logic_joints(self, previous, actual):

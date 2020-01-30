@@ -22,20 +22,20 @@ class joy_commander:
             # ROS LOOP REGULARIZER :: 10hz to send a message
             self.rate = rospy.Rate(10)                  
             # DEFINE A PUBLISHER for OMP JOINT 1 TOPIC
-            self.pubJ1 = rospy.Publisher('/open_manipulator_pro/joint1_position/command', Float64, queue_size=10)
+            self.pubJ1 = rospy.Publisher('/open_manipulator_p/joint1_position/command', Float64, queue_size=10)
             # DEFINE A PUBLISHER for OMP JOINT 2 TOPIC
-            self.pubJ2 = rospy.Publisher('/open_manipulator_pro/joint2_position/command', Float64, queue_size=10)
+            self.pubJ2 = rospy.Publisher('/open_manipulator_p/joint2_position/command', Float64, queue_size=10)
             # DEFINE A SUBSCRIBER for JOY COMMANDS
             self.sub = rospy.Subscriber('/joy', Joy, self.callback, queue_size=10)
             # DEFINE A SUBSCRIBER for JOINT STATES
-            self.subJS = rospy.Subscriber('/open_manipulator_pro/joint_states', JointState, self.callbackJS, queue_size=10)
+            self.subJS = rospy.Subscriber('/open_manipulator_p/joint_states', JointState, self.callbackJS, queue_size=10)
 
     # METHOD - SET OMP IN HOME POSITION IN SIMULATION
     def ompHomePose(self):
         # DEFINE PUBLISHERS FOR OTHERS JOINTS
-        pub3 = rospy.Publisher('/open_manipulator_pro/joint3_position/command', Float64, queue_size=10)
-        pub4 = rospy.Publisher('/open_manipulator_pro/joint4_position/command', Float64, queue_size=10)
-        pub5 = rospy.Publisher('/open_manipulator_pro/joint5_position/command', Float64, queue_size=10)
+        pub3 = rospy.Publisher('/open_manipulator_p/joint3_position/command', Float64, queue_size=10)
+        pub4 = rospy.Publisher('/open_manipulator_p/joint4_position/command', Float64, queue_size=10)
+        pub5 = rospy.Publisher('/open_manipulator_p/joint5_position/command', Float64, queue_size=10)
         # DESIRED JOINTS POSITION (1 to 5)
         values = [-0.1, 0.0, -0.78, 0.0, 0.0]
         #values = [-0.5, 0.5, -0.50, 0.5, 0.5]

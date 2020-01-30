@@ -30,7 +30,7 @@ class OpenManipulator_joy_commander:
             # ROS LOOP REGULARIZER :: [Hz] frequency to send a message
             self.rate = rospy.Rate(2)                  
             # DEFINE A SERVICE TO COMMAND YOUR ROBOT JOINTS
-            topic_commands = '/open_manipulator_pro/goal_joint_space_path'              # Service proper name
+            topic_commands = '/open_manipulator_p/goal_joint_space_path'              # Service proper name
             rospy.wait_for_service(topic_commands)                                      # Wait until the service is up
             self.SRV_commander = rospy.ServiceProxy(topic_commands, SetJointPosition)   # Get the service
             # DEFINE MESSAGE SCOPE TO OUR SERVICE
@@ -44,7 +44,7 @@ class OpenManipulator_joy_commander:
             # DEFINE A SUBSCRIBER for JOY COMMANDS
             rospy.Subscriber('/joy', Joy, self.callback, queue_size=10)
             # DEFINE A SUBSCRIBER for JOINT STATES
-            rospy.Subscriber('/open_manipulator_pro/joint_states', JointState, self.callbackJS, queue_size=10)
+            rospy.Subscriber('/open_manipulator_p/joint_states', JointState, self.callbackJS, queue_size=10)
 
     # CALLBACK - GET JOY DATA
     def callback(self, joyMsg):
