@@ -17,7 +17,7 @@ benchmark_config:
 
             ## Could be a bug, but the benchmark.launch ignores the queries here and test every query in the scene
             ## Independent that is here or not
-        start_states: pHome
+        start_states: start_state
     planners:
         - plugin: ompl_interface/OMPLPlanner
           planners:
