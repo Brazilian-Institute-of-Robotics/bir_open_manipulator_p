@@ -1,6 +1,6 @@
 <launch>
   <!-- gazebo_ros_control PID commands-->
-  <rosparam file="$(find bir_open_manipulator_p_with_gripper_cam_moveit)/config/bir_omp_PID_gains.yaml" command="load"/>
+  <!--<rosparam file="$(find bir_open_manipulator_p_with_gripper_cam_moveit)/config/bir_omp_PID_gains.yaml" command="load"/>-->
   
   <!-- These are the arguments you can pass this launch file, for example paused:=true -->
   <arg name="use_robot_name" default="open_manipulator_p"

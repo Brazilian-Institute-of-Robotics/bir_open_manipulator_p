@@ -115,18 +115,22 @@ class openManipulatorPRO:
                 # CATCH WITH GRIPPER
                 self.set_joint_go(7, 1.0)
                 # GET UP THE BOTTLE
-                self.set_joint_go(5, -0.80)
+                self.set_joint_go(5, -0.95)
+                # GO TO SEARCH INIT
+                self.go_to_pose('pSearch')
+                # OPEN THE GRIPPER
+                self.set_joint_go(7, 2.0)
                 # FINISH PROGRAM
                 sys.exit()   
 
     # AUXILIAR FUNCTION FOR SEVERAL TESTS
     def test_routine(self):
-        self.go_to_pose('pHome')
-        self.go_to_pose('pSearch')
-        self.go_to_pose('pCatch')
+        #self.go_to_pose('pHome')
+        #self.go_to_pose('pSearch')
+        #self.go_to_pose('pCatch')
         self.go_to_pose('pCatchBottle')
         self.set_joint_go(7, 1.0)
-        self.set_joint_go(5, -0.80)
+        self.set_joint_go(5, -0.95)
 
 
 if __name__ == '__main__':
