@@ -10,7 +10,7 @@ from apriltag_ros.msg import AprilTagDetectionArray
 
 # CONSTANTS
 N_ROBOT_JOINTS = 6
-POSE_TOLERANCE = 0.01
+POSE_TOLERANCE = 0.05
 FRAMES_LIMIT = 25
 ROTATION_DEGREE = -20
 J1_LIMIT_DEGREE = -175
@@ -32,8 +32,8 @@ class openManipulatorPRO:
         # TAG DETECTION INIT
         self.tag_id_subscriber = rospy.Subscriber('/tag_detections', AprilTagDetectionArray,self.tagCB)
         # MOVEIT RESTRICTIONS
-        self.group.set_goal_position_tolerance(POSE_TOLERANCE)             # GOAL TOLERANCE
-        self.group.set_planning_time(5)                         # TIME TO PLANNING
+        self.group.set_goal_position_tolerance(POSE_TOLERANCE)      # GOAL TOLERANCE
+        self.group.set_planning_time(5)                             # TIME TO PLANNING
 
     # FUNCTION - CALLBACK
     def tagCB(self,data):
@@ -71,15 +71,8 @@ class openManipulatorPRO:
         else:
             jointTarget[0] = jointTarget[0] + (ROTATION_DEGREE*pi/180)
             self.group.go(joints=jointTarget, wait=True)
-            while not rospy.is_shutdown():
-                # GET ACTUAL STATE TO VERIFY
-                jointActual = self.group.get_current_joint_values()
-                # STOP CONDITION
-                if abs(jointActual[0] - jointTarget[0]) <= POSE_TOLERANCE:
-                    self.group.stop()
-                    self.group.clear_pose_targets()
-                    rospy.sleep(0.5)
-                    break
+            self.group.stop()
+            self.group.clear_pose_targets()
 
     # FUNCTION - SET SPECIFIC JOINT
     def set_joint_go(self, jointIndex, joint_angle_rad):
@@ -120,9 +113,9 @@ class openManipulatorPRO:
                 # GO TO CATCH POSITION BOTTLE
                 self.go_to_pose('pCatchBottle')
                 # CATCH WITH GRIPPER
-                self.set_joint_go(7, 1)
+                self.set_joint_go(7, 1.0)
                 # GET UP THE BOTTLE
-                self.set_joint_go(5, -0.95)
+                self.set_joint_go(5, -0.80)
                 # FINISH PROGRAM
                 sys.exit()   
 
@@ -130,6 +123,10 @@ class openManipulatorPRO:
     def test_routine(self):
         self.go_to_pose('pHome')
         self.go_to_pose('pSearch')
+        self.go_to_pose('pCatch')
+        self.go_to_pose('pCatchBottle')
+        self.set_joint_go(7, 1.0)
+        self.set_joint_go(5, -0.80)
 
 
 if __name__ == '__main__':
