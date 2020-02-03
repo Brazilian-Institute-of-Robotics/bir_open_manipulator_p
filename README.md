@@ -188,46 +188,42 @@ For more useful information acess [here](http://emanual.robotis.com/docs/en/soft
 
 ![scene](https://user-images.githubusercontent.com/32513366/69746813-db5c2c80-1123-11ea-86cd-9a9bcba4f18a.png)
 
-- **ROS package**: bir_open_manipulator_p_moveit
+- **ROS package**: [bir_open_manipulator_p_moveit]()
+
 - **Workspace Depedencies**
     - warehouse_ros_mongo
     - qt_ros
-- **Access link**: [README]()
+
 
 ### Camera RGB package for Apriltag Detection
 - **Overview**: Package developed using MoveIt! to search and detect apriltags using a RGB camera
 
 ![omp_simulation](https://user-images.githubusercontent.com/32513366/71183468-cc662700-2256-11ea-9dc7-70dee951ed8a.png)
 
-- **ROS package**: bir_open_manipulator_p_with_cam_moveit
+- **ROS package**: [bir_open_manipulator_p_with_cam_moveit]()
 
 - **Workspace Depedencies**
     - apriltag
     - apriltag_ros
     - def_cam_teledyne
-
-- **Access link**: [README]()
-
 
 ### Gripper with Camera package for detection tasks
 - **Overview**: Package developed using MoveIt! and can be considered an extension of previous package, but now was insert a custom gripper for several tasks based on tag detection
 
 ![omp_w_camera_gripper](https://user-images.githubusercontent.com/32513366/71099457-15a07300-2192-11ea-918d-7a39e6989054.png)
 
-- **ROS package**: bir_open_manipulator_p_with_gripper_cam_moveit
+- **ROS package**: [bir_open_manipulator_p_with_gripper_cam_moveit]()
 - **Workspace Depedencies**
     - apriltag
     - apriltag_ros
     - def_cam_teledyne
 
-- **Access Link**: [README]()
+
 
 ### Joy Control for OpenManipulator-PRO
 - **Overview**: Package to control the manipulator using a XBOX360 joystick with graphical visualization in python.
 
-- **ROS package**: bir_open_manipulator_p_joy_control
+- **ROS package**: [bir_open_manipulator_p_joy_control]()
 
 - **Workspace Depedencies**
     - None
-
-- **Access Link**: [README]()
