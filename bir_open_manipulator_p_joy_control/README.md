@@ -11,7 +11,7 @@ This repository was created using:
 ### ROS Packages
 It is necessary to have some controllers packages:
 ```sh
-sudo apt-get install joy ros-melodic-ros-control ros-melodic-gazebo-ros-control ros-melodic-controller-manager ros-melodic-joint-trajectory-controller ros-melodic-joint-state-controller
+sudo apt-get install ros-melodic-joy ros-melodic-ros-control ros-melodic-gazebo-ros-control ros-melodic-controller-manager ros-melodic-joint-trajectory-controller ros-melodic-joint-state-controller
 ros-melodic-position-controllers
 ```
 It is strictly recommend to have those specifications, before you proceed.
