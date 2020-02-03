@@ -45,7 +45,6 @@ To get the files developed to create 3D supports and meshes for URDF, search in 
 
 ## **Requirements**
 
-### System Requirements
 This repository was created using:
 - ROS version - **Melodic**
 - OS - **Ubuntu 18.04**
