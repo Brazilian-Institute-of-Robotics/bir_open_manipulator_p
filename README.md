@@ -16,17 +16,18 @@ Explicar que tudo que foi criado tem a tag bir_omp (pacotes e codigos)
 
 ## **Requirements**
 
-### Basic Requirements
+### System Requirements
 This repository was created using:
 - ROS version - **Melodic**
 - OS - **Ubuntu 18.04**
 
-Besides that, it is necessary to have **MoveIt! 1.0** installed
+### ROS Packages
+It is necessary to have **MoveIt! 1.0** installed
 
 ```sh    
 sudo apt-get install ros-melodic-moveit
 ```
-and some ROS packages:
+and some controllers packages:
 ```sh
 sudo apt-get install ros-melodic-ros-control ros-melodic-gazebo-ros-control ros-melodic-controller-manager ros-melodic-joint-trajectory-controller ros-melodic-joint-state-controller
 ros-melodic-position-controllers
@@ -39,7 +40,7 @@ First, to use this meta package create a new workspace:
 mkdir -p ~workspaces/omp_ws/src
 cd ~/workspaces/omp_ws/src
 ```
-After that, install the dependencies that are necessary to use OpenManipulator-PRO and simulations using ROS:
+After that, install the dependencies that are necessary to use OpenManipulator-PRO and simulations with ROS/Gazebo:
 
 - [DynamixelSDK](https://github.com/ROBOTIS-GIT/DynamixelSDK) (master branch)
     ```sh
@@ -88,6 +89,12 @@ To use correctly any package developed here, get those dependencies:
     ```sh
     git clone -b indigo https://github.com/stonier/qt_ros.git
     ```
+- [def_cam_teledyne_nano](https://github.com/Brazilian-Institute-of-Robotics/def_cam_teledyne_nano) (feature-flip branch)
+    ```sh
+    git clone -b feature-flip https://github.com/Brazilian-Institute-of-Robotics/def_cam_teledyne_nano.git
+    ```
+
+
 And **MongoDB**. To install the complete version for Ubuntu 18.04, follow the steps bellow in a terminal:
 ```sh    
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2930ADAE8CAF5059EE73BB4B58712A2291FA4AD5
@@ -116,13 +123,23 @@ rosdep install --from-paths src --ignore-src -r -y
 Those commands install and update any missing requirement for your packages.
 
 
-## **Modified Requirements**
-This dependencies was manually changed during development and are present here (**it is not necessary to clone them**). They are:
- - **[apriltag_ros](https://github.com/AprilRobotics/apriltag_ros) (master branch)** for autonomous tag detection.
- - **[def_cam_teledyne_nano](https://github.com/Brazilian-Institute-of-Robotics/def_cam_teledyne_nano) (refactor_code branch)** for Teledyne connection.
- - **[open_manipulator_pro](https://github.com/ROBOTIS-GIT/open_manipulator_pro) (master branch)** for robot communication.
+### Manual changes
+Some packages presented in *Repository Dependencies* required manual changes.
+
+#### apriltag_ros
+This wrapper is used to tag detection. For this repository, more precisely the developed packages that use a camera you need to change configuration files:
+- *settings.yaml*: Define ```tag_family: 'tag25h9'```. This option is related to the tag family used here.
+- *tags.yaml*: Define in ```standalone_tags``` the tags that are going to be used. For this repository, was only necessary one tag that you define as:
+    ```mak
+    standalone_tags:
+    [
+        {id: 1, size: 0.15, name: tag00001}
+    ]
+    ```
 
 
-## Dynamixel Wizard 2.0
 
-## Developed ROS packages
+
+## **Dynamixel Wizard 2.0**
+
+## **Developed ROS packages**
