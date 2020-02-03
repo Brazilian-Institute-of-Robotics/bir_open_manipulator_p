@@ -123,7 +123,7 @@ To use correctly any package developed here, get those dependencies in your work
     git clone -b indigo https://github.com/stonier/qt_ros.git
     ```
 
-And **MongoDB**. To install the complete version for Ubuntu 18.04, follow the steps bellow in a terminal:
+Besides that, you need **MongoDB**. To install the complete version for Ubuntu 18.04, follow the steps bellow in a terminal:
 ```sh    
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2930ADAE8CAF5059EE73BB4B58712A2291FA4AD5
 ```
@@ -140,10 +140,10 @@ sudo apt-get install -y mongodb-org
 For more info about MongoDB installation, acess [here](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/).
 
 ### Manual changes
-Some packages presented in *Repository Dependencies* required manual changes.
+Some packages presented in *Workspace Dependencies* required manual changes.
 
 #### apriltag_ros
-This wrapper is used to tag detection. For this repository, more precisely the developed packages that use a camera you need to change configuration files:
+This wrapper is used to tag detection. For this repository, more precisely the developed packages that use a camera, you need to change the configuration files in ```config folder```:
 - *settings.yaml*: Define ```tag_family: 'tag25h9'```. This option is related to the tag family used here.
 - *tags.yaml*: Define in ```standalone_tags``` the tags that are going to be used. For this repository, was only necessary one tag that you define as:
     ```yaml
