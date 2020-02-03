@@ -74,9 +74,9 @@ To use correctly any package developed here, get those dependencies in your work
     ```sh
     git clone -b master https://github.com/AprilRobotics/apriltag_ros.git
     ```
-- [def_cam_teledyne_nano](https://github.com/Brazilian-Institute-of-Robotics/def_cam_teledyne_nano) (feature-flip branch)
+- [def_cam_teledyne_nano](https://github.com/Brazilian-Institute-of-Robotics/def_cam_teledyne_nano) (feature_flip branch)
     ```sh
-    git clone -b feature-flip https://github.com/Brazilian-Institute-of-Robotics/def_cam_teledyne_nano.git
+    git clone -b feature_flip https://github.com/Brazilian-Institute-of-Robotics/def_cam_teledyne_nano.git
     ```
 
 ### Manual changes
