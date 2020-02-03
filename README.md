@@ -188,7 +188,7 @@ For more useful information acess [here](http://emanual.robotis.com/docs/en/soft
 
 ![scene](https://user-images.githubusercontent.com/32513366/69746813-db5c2c80-1123-11ea-86cd-9a9bcba4f18a.png)
 
-- **ROS package**: [bir_open_manipulator_p_moveit]()
+- **ROS package**: [bir_open_manipulator_p_moveit](https://github.com/Brazilian-Institute-of-Robotics/bir_open_manipulator_p/tree/develop-moving/bir_open_manipulator_p_moveit)
 
 - **Workspace Depedencies**
     - warehouse_ros_mongo
@@ -200,7 +200,7 @@ For more useful information acess [here](http://emanual.robotis.com/docs/en/soft
 
 ![omp_simulation](https://user-images.githubusercontent.com/32513366/71183468-cc662700-2256-11ea-9dc7-70dee951ed8a.png)
 
-- **ROS package**: [bir_open_manipulator_p_with_cam_moveit]()
+- **ROS package**: [bir_open_manipulator_p_with_cam_moveit](https://github.com/Brazilian-Institute-of-Robotics/bir_open_manipulator_p/tree/develop-moving/bir_open_manipulator_p_with_cam_moveit)
 
 - **Workspace Depedencies**
     - apriltag
@@ -212,7 +212,7 @@ For more useful information acess [here](http://emanual.robotis.com/docs/en/soft
 
 ![omp_w_camera_gripper](https://user-images.githubusercontent.com/32513366/71099457-15a07300-2192-11ea-918d-7a39e6989054.png)
 
-- **ROS package**: [bir_open_manipulator_p_with_gripper_cam_moveit]()
+- **ROS package**: [bir_open_manipulator_p_with_gripper_cam_moveit](https://github.com/Brazilian-Institute-of-Robotics/bir_open_manipulator_p/tree/develop-moving/bir_open_manipulator_p_with_gripper_cam_moveit)
 - **Workspace Depedencies**
     - apriltag
     - apriltag_ros
@@ -223,7 +223,7 @@ For more useful information acess [here](http://emanual.robotis.com/docs/en/soft
 ### Joy Control for OpenManipulator-PRO
 - **Overview**: Package to control the manipulator using a XBOX360 joystick with graphical visualization in python.
 
-- **ROS package**: [bir_open_manipulator_p_joy_control]()
+- **ROS package**: [bir_open_manipulator_p_joy_control](https://github.com/Brazilian-Institute-of-Robotics/bir_open_manipulator_p/tree/develop-moving/bir_open_manipulator_p_joy_control_moveit)
 
 - **Workspace Depedencies**
     - None
