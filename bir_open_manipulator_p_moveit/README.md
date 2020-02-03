@@ -103,7 +103,7 @@ Here you can see the presented scene with a specific query loaded, where the end
 
 
 ### **1.3. Setting your Benchmark options**
-To change any configuration detail for your benchmark, modify **benchmark_settings.yaml** in **config** folder. There, you will find those sections:
+To change any configuration detail for your benchmark, modify **bir_omp_benchmark_settings.yaml** in **config** folder. There, you will find those sections:
 - **warehouse**: Default, related to MongoDB connection
 - **parameters**: Here you can set the parameters for the process itself as *runs*, *timeout*, *queries and start states names*, *moveGroup name* and path definition to save(*output_directory*)
 - **planner**: The set of algorithms that you want to eval.
@@ -111,10 +111,6 @@ To change any configuration detail for your benchmark, modify **benchmark_settin
 **PS**: Probably a bug from MoveIt! Benchmarking, but all the queries will be evaluated regardless the queries that you set in **parameters**
 
 ### **2. Run the Benchmark**
-
-```sh
-roslaunch bir_open_manipulator_p_moveit benchmark.launch
-```
 
 ```sh
 roslaunch bir_open_manipulator_p_moveit bir_omp_benchmark.launch
