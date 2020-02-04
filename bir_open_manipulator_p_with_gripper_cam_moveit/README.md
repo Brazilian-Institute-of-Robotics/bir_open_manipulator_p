@@ -128,7 +128,7 @@ rosrun bir_open_manipulator_p_with_gripper_cam_moveit bir_omp_catch_simulation.p
 
 #### Run Controllers with MoveIt!
 ```sh
-roslaunch bir_open_manipulator_p_controller bir_open_manipulator_p_controller.launch use_moveit:=true with_gripper:=true
+roslaunch bir_open_manipulator_p_with_gripper_cam_moveit bir_omp_deploy_robot_with_moveit.launch
 ```
 #### Run Camera and Apriltag Detection
 ```sh
@@ -137,7 +137,7 @@ roslaunch bir_open_manipulator_p_with_gripper_cam_moveit bir_omp_deploy_cam_for_
 
 #### Run the robot routine
 ```sh
-rosrun bir_open_manipulator_p_with_gripper_cam_moveit catch_realWorld2.py 
+rosrun bir_open_manipulator_p_with_gripper_cam_moveit bir_omp_catch_realWorld2.py 
 ```
 ## **Create your own apriltags**
 The process follows:
