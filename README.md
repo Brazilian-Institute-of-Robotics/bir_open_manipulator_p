@@ -135,6 +135,10 @@ cd mongo-cxx-driver
 ```sh
 sudo scons --prefix=/usr/local/ --full --use-system-boost --disable-warnings-as-errors
 ```
+To use **qt_ros** correctly in your computer (necessary to build), please install QT Make:
+```sh
+sudo apt-get install qt4-default
+```
 
 Besides that, you need **MongoDB**. To install the complete version for Ubuntu 18.04, follow the steps bellow in a terminal:
 ```sh    
