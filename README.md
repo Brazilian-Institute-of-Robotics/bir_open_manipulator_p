@@ -239,9 +239,9 @@ For more useful information acess [here](http://emanual.robotis.com/docs/en/soft
     - def_cam_teledyne
 
 ### Joy Control for OpenManipulator-PRO
-- **Overview**: Package to control the manipulator using a XBOX360 joystick with graphical visualization in python.
+- **Overview**: Package to control Joint 1 and 2 using a XBOX360 joystick with graphical visualization in python.
 
-- **ROS package**: [bir_open_manipulator_p_joy_control](https://github.com/Brazilian-Institute-of-Robotics/bir_open_manipulator_p/tree/develop-moving/bir_open_manipulator_p_joy_control_moveit)
+- **ROS package**: [bir_open_manipulator_p_joy_control](https://github.com/Brazilian-Institute-of-Robotics/bir_open_manipulator_p/tree/develop-moving/bir_open_manipulator_p_joy_control)
 
 - **Workspace Depedencies**
     - None
