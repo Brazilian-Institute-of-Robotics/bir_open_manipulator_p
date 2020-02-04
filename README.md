@@ -2,7 +2,7 @@
 
 ![ompBIR](https://user-images.githubusercontent.com/32513366/73663829-15deca00-467d-11ea-853e-bce2171e91f0.jpeg)
 
-Repository for several uses with OpenManipulator-PRO from ROBOTIS customized in BIR (Brazilian Institute of Robotics). This content was first forked from an original repository, for more information access [here](https://github.com/ROBOTIS-GIT/open_manipulator_p).
+Repository for several uses with OpenManipulator-PRO from ROBOTIS customized in BIR (Brazilian Institute of Robotics). This content was forked from an original ROBOTIS repository, for more information access [here](https://github.com/ROBOTIS-GIT/open_manipulator_p).
 
 ## **Summary**
 - Robot Modifications
