@@ -34,6 +34,19 @@ To use correctly any package developed here, get those dependencies in your work
     ```sh
     git clone -b indigo https://github.com/stonier/qt_ros.git
     ```
+To use **warehouse-ros-mongo**, install in your **src** folder mongo dependency, necessary to build your workspace, as proposed in this [README](https://github.com/ros-planning/warehouse_ros_mongo):
+```sh
+git clone -b 26compat https://github.com/mongodb/mongo-cxx-driver.git
+```
+```sh
+sudo apt-get install scons
+```
+```sh
+cd mongo-cxx-driver
+```
+```sh
+sudo scons --prefix=/usr/local/ --full --use-system-boost --disable-warnings-as-errors
+```
 
 Besides that, you need **MongoDB**. To install the complete version for Ubuntu 18.04, follow the steps bellow in a terminal:
 ```sh    
