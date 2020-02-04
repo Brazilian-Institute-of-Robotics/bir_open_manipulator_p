@@ -68,6 +68,11 @@ First, to use this meta package create a new workspace:
 mkdir -p ~workspaces/omp_ws/src
 cd ~/workspaces/omp_ws/src
 ```
+Then, clone this metapackage:
+```sh
+git clone -b develop-moving https://github.com/Brazilian-Institute-of-Robotics/bir_open_manipulator_p.git
+
+```
 After that, install the dependencies that are necessary to use OpenManipulator-PRO and simulations with ROS/Gazebo:
 
 - [DynamixelSDK](https://github.com/ROBOTIS-GIT/DynamixelSDK) (master branch)
