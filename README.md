@@ -203,6 +203,18 @@ After a successful **Scan** you can see at your superior-left a Dynamixels list 
 
 For more useful information acess [here](http://emanual.robotis.com/docs/en/software/dynamixel/dynamixel_wizard2/), there you will have a link to download this software.
 
+After installation, if you have a problem to connect your OpenManipulator-PRO through USB port try:
+
+1 - Verify if you have connection through terminal command:
+```sh
+dmesg
+```
+
+2 - Allow your system to read your USB Port
+```sh
+sudo chmod 666 /dev/ttyUSB0
+```
+
 **PS**: You can use this software without any ROS connection. But, if you use this software, you can not use at the same time any ROS package to communicate with your robot.
 
 ## **Developed ROS packages**
