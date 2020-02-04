@@ -82,7 +82,7 @@ rosrun bir_open_manipulator_p_joy_control bir_omp_joystick_simulation.py
 rosrun bir_open_manipulator_p_joy_control bir_omp_plot_real_time.py
 ```
 
-### **1. Joystick control in Real world**
+### **2. Joystick control in Real world**
 
 #### Run Gazebo
 ```sh
