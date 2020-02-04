@@ -175,13 +175,12 @@ Some packages presented in *Workspace Dependencies* required manual changes.
 This wrapper is used to tag detection. For this repository, more precisely the developed packages that use a camera, you need to change the configuration files in ```config folder```:
 - *settings.yaml*: Define ```tag_family: 'tag25h9'```. This option is related to the tag family used here.
 - *tags.yaml*: Define in ```standalone_tags``` the tags that are going to be used. For this repository, was only necessary one tag that you define as:
-    ```yaml
-    standalone_tags:
-    [
-        {id: 1,size: 0.15,name: tag00001}
-    ]
-    ```
-
+```yaml
+standalone_tags:
+  [
+    {id: 1, size: 0.15, name: tag00001}
+  ]
+```
 ### Finishing
 After all depedencies are present in your workspace, in a terminal:
 ```sh
