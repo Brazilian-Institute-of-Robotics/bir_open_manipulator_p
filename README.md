@@ -6,13 +6,19 @@ This repository consists of a ROS metapackage suited to the BIR (Brazilian Insti
 
 ## **Summary**
 - [Robot Modifications](#robot-modifications)
-- [Requirements](#requirements)
+- [Robot arm Setup](#robot-arm-setup)
 - [Dynamixel Wizard 2.0](#dynamixel-wizard-20)
+- [Requirements](#requirements)
 - [Developed ROS Packages](#developed-ros-packages)
 
 ## **Robot Modifications**
-OpenManipulator-PRO is a robot arm composed by 6 revolute joints, where each is a Dynamixel PRO. For BIR customization, was added to OpenManipulator-PRO three modifications:
-- Metal base support: Give a support to use properly the arm.
+OpenManipulator-PRO is a robot arm composed by 6 revolute joints, where each is a Dynamixel PRO:
+![ompJOINTS](https://user-images.githubusercontent.com/32513366/73868912-123b7680-4828-11ea-9500-034c9449867c.png)
+
+Source: [ROBOTIS](http://www.robotis.us/openmanipulator-pro/)
+
+For BIR customized model, was added to OpenManipulator-PRO three modifications:
+- Metal base support: Give a base support to manipulate the robotic arm.
 - Custom Gripper: The original basic manipulator does not include an end-effector, so it was design one to meet our demand.
 - Camera: Insert a visual sensor (camera) to perform different tasks based in detection.
 
@@ -43,6 +49,53 @@ The support was created using [Onshape web software](https://cad.onshape.com/sig
 To get the files developed to create 3D supports and meshes for URDF, search in *Onshape* for:
 ![3DS](https://user-images.githubusercontent.com/32513366/73663586-a5d04400-467c-11ea-9879-e8e6e5a26cf4.png)
 
+## Robot arm Setup
+To use correctly our customized BIR OpenManipulator-PRO (arm and modifications) you are going to need:
+- 1 DC Power Supply capable to get 24 Volts (recommended by ROBOTIS is 24V/15A, but for our applications 15A was not necessary)
+- 1 Power Supply for Teledyne camera
+- 1 Power cable to connect your Robot to Power Supply
+- 1 Ethernet cable to connect your Teledyne camera to your computer
+- 1 USB cable to connect your Robot to your computer
+- 1 Printed support to rest your robot
+
+Bellow you can see a Power Supply for your robot and camera:
+IMAGE
+
+Here you can see all connectors and the printed support at your left:
+IMAGE
+
+Before you proceed with any power connection, is recommend to manually insert OpenManipulator-PRO in this position:
+IMAGE
+
+PS: For your security, keep in mind the OpenManipulator workspace:
+![ompWS](https://user-images.githubusercontent.com/32513366/73868913-12d40d00-4828-11ea-9add-7e510da677dc.png)
+
+## **Dynamixel Wizard 2.0**
+This software was developed by **ROBOTIS** and allows the user an easy control over the OpenManipulator joints. Your interface is shown bellow
+
+![dw2](https://user-images.githubusercontent.com/32513366/73656756-8ed72500-466f-11ea-9788-5d7a6b8cb474.png)
+
+First, I will briefly explain some important options in MENU:
+- **Scan**: Search connected Dynamixels in your computer
+- **Disconnect**: Disconnect a selected Dynamixel from your computer
+- **Options**: Define the search parameters to find a specific Dynamixel as baud rate, USB port and so on.
+- **Update**: Used to change an communication protocol for your Dynamixel.
+
+After a successful **Scan** you can see at your superior-left a Dynamixels list with ID and model, at your superior-right a manual control to a Dynamixel that can be set with your mouse and in the middle, with a **disable torque** you can change several limits/info from your Dynamixel such as PID values, Max/Min velocities and positions.
+
+For more useful information acess [here](http://emanual.robotis.com/docs/en/software/dynamixel/dynamixel_wizard2/), there you will have a link to download this software.
+
+After installation, if you have a problem to connect your OpenManipulator-PRO through USB port try:
+
+1 - Verify if you have connection through terminal command:
+```sh
+dmesg
+```
+
+2 - Allow your system to read your USB Port
+```sh
+sudo chmod 666 /dev/ttyUSB0
+```
 
 ## **Requirements**
 
@@ -192,33 +245,6 @@ source ~/.bashrc
 rosdep install --from-paths src --ignore-src -r -y
 ```
 Those commands install and update any missing requirement for your packages.
-
-## **Dynamixel Wizard 2.0**
-This software was developed by **ROBOTIS** and allows the user an easy control over the OpenManipulator joints. Your interface is shown bellow
-
-![dw2](https://user-images.githubusercontent.com/32513366/73656756-8ed72500-466f-11ea-9788-5d7a6b8cb474.png)
-
-First, I will briefly explain some important options in MENU:
-- **Scan**: Search connected Dynamixels in your computer
-- **Disconnect**: Disconnect a selected Dynamixel from your computer
-- **Options**: Define the search parameters to find a specific Dynamixel as baud rate, USB port and so on.
-- **Update**: Used to change an communication protocol for your Dynamixel.
-
-After a successful **Scan** you can see at your superior-left a Dynamixels list with ID and model, at your superior-right a manual control to a Dynamixel that can be set with your mouse and in the middle, with a **disable torque** you can change several limits/info from your Dynamixel such as PID values, Max/Min velocities and positions.
-
-For more useful information acess [here](http://emanual.robotis.com/docs/en/software/dynamixel/dynamixel_wizard2/), there you will have a link to download this software.
-
-After installation, if you have a problem to connect your OpenManipulator-PRO through USB port try:
-
-1 - Verify if you have connection through terminal command:
-```sh
-dmesg
-```
-
-2 - Allow your system to read your USB Port
-```sh
-sudo chmod 666 /dev/ttyUSB0
-```
 
 **PS**: You can use this software without any ROS connection. But, if you use this software, you can not use at the same time any ROS package to communicate with your robot.
 
