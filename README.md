@@ -2,18 +2,19 @@
 
 ![ompBIR](https://user-images.githubusercontent.com/32513366/73663829-15deca00-467d-11ea-853e-bce2171e91f0.jpeg)
 
-Repository for several uses with OpenManipulator-PRO from ROBOTIS customized in BIR (Brazilian Institute of Robotics). This content was forked from an original ROBOTIS repository, for more information access [here](https://github.com/ROBOTIS-GIT/open_manipulator_p).
+This repository consists of a ROS metapackage suited to the BIR (Brazilian Institute of Robotics) customized ROBOTIS OpenMANIPULATOR-PRO. Present content was forked and modified from original ROBOTIS repository - more information [here](https://github.com/ROBOTIS-GIT/open_manipulator_p).
 
 ## **Summary**
-- Robot Modifications
-- Requirements
-- Dynamixel Wizard 2.0
-- Developed ROS Packages
+- [Robot Modifications](#robot-modifications)
+- [Requirements](#requirements)
+- [Dynamixel Wizard 2.0](#dynamixel-wizard-20)
+- [Developed ROS Packages](#developed-ros-packages)
 
 ## **Robot Modifications**
-Was added to OpenManipulator-PRO two itens:
-- Custom Gripper
-- Camera
+OpenManipulator-PRO is a robot arm composed by 6 revolute joints, where each is a Dynamixel PRO. For BIR customization, was added to OpenManipulator-PRO three modifications:
+- Metal base support: Give a support to use properly the arm.
+- Custom Gripper: The original basic manipulator does not include an end-effector, so it was design one to meet our demand.
+- Camera: Insert a visual sensor (camera) to perform different tasks based in detection.
 
 ### Custom Gripper
 This tool is composed by
