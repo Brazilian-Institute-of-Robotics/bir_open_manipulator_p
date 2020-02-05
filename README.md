@@ -18,9 +18,9 @@ OpenManipulator-PRO is a robot arm composed by 6 revolute joints, where each is 
 Source: [ROBOTIS](http://www.robotis.us/openmanipulator-pro/)
 
 For BIR customized model, was added to OpenManipulator-PRO three modifications:
-- Metal base support: Give a base support to manipulate the robotic arm.
-- Custom Gripper: The original basic manipulator does not include an end-effector, so it was design one to meet our demand.
-- Camera: Insert a visual sensor (camera) to perform different tasks based in detection.
+- **Metal base support**: Give a base support to manipulate the robotic arm.
+- **Custom Gripper**: The original basic manipulator does not include an end-effector, so it was design one to meet our demand.
+- **Camera**: Insert a visual sensor (camera) to perform different tasks based in detection.
 
 ### Custom Gripper
 This tool is composed by
@@ -59,13 +59,13 @@ To use correctly our customized BIR OpenManipulator-PRO (arm and modifications) 
 - 1 Printed support to rest your robot
 
 Bellow you can see a Power Supply for your robot and camera:
-IMAGE
+![POWER](https://user-images.githubusercontent.com/32513366/73876287-803a6a80-4835-11ea-9fda-a38a40d841e3.jpeg)
 
-Here you can see all connectors and the printed support at your left:
-IMAGE
+Here you can see all connectors and the printed support at your right:
+![conectors](https://user-images.githubusercontent.com/32513366/73876275-7ca6e380-4835-11ea-949f-ff1864d59d0e.jpeg)
 
 Before you proceed with any power connection, is recommend to manually insert OpenManipulator-PRO in this position:
-IMAGE
+![ompPHOME](https://user-images.githubusercontent.com/32513366/73876283-7f093d80-4835-11ea-9a5d-6d9be0652609.jpeg)
 
 PS: For your security, keep in mind the OpenManipulator workspace:
 ![ompWS](https://user-images.githubusercontent.com/32513366/73868913-12d40d00-4828-11ea-9add-7e510da677dc.png)
