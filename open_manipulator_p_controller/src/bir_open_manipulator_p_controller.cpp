@@ -16,7 +16,7 @@
 
 /* Authors: Darby Lim, Hye-Jong KIM, Ryan Shim, Yong-Ho Na */
 
-#include "open_manipulator_p_controller/open_manipulator_p_controller.h"
+#include "open_manipulator_p_controller/bir_open_manipulator_p_controller.h"
 
 using namespace open_manipulator_controller;
 
