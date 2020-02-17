@@ -65,6 +65,11 @@ rosdep install --from-paths src --ignore-src -r -y
 Those commands install and update any missing requirement for your packages.
 
 ## **Usage**
+Before any usage, is necessary to start your joystick communication by:
+```sh
+sudo xboxdrv --detach-kernel-driver
+```
+
 ### **1. Joystick control in Gazebo simulation**
 
 #### Run Gazebo
