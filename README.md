@@ -107,6 +107,11 @@ git clone -b master https://github.com/Brazilian-Institute-of-Robotics/bir_open_
 ```sh
 git clone -b master https://github.com/Brazilian-Institute-of-Robotics/bir_open_manipulator_p_with_gripper_cam_moveit.git
 ```
+For evaluate any *MoveIt!* planner for original model:
+- [bir_open_manipulator_p_moveit](https://github.com/Brazilian-Institute-of-Robotics/bir_open_manipulator_p_moveit.git) (master branch)
+```sh
+git clone -b master https://github.com/Brazilian-Institute-of-Robotics/bir_open_manipulator_p_moveit.git
+```
 
 ## **Requirements**
 
