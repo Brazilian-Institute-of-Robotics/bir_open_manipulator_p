@@ -1,9 +1,0 @@
-<launch>
-    <!-- Launch Gazebo simulation -->
-    <include file="$(find open_manipulator_p_gazebo)/launch/open_manipulator_p_gazebo.launch">
-         <arg name="paused" value="false"/>
-    </include>
-    <!-- Launch Joy node -->
-    <node name="joy_node" pkg="joy" type="joy_node"/>
-
-</launch>
