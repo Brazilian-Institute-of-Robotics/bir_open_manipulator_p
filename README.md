@@ -98,12 +98,12 @@ sudo chmod 666 /dev/ttyUSB0
 ```
 
 ## **MoveIt! Packages**
-To use any *MoveIt!* application for this custom model, get those repositories:
-- To use only OpenManipulator-PRO with a custom camera:
+To use any *MoveIt!* application for this custom model with a RBG Camera or Gripper with RGB Camera, get those repositories respectively:
+- [bir_open_manipulator_p_with_cam_moveit](https://github.com/Brazilian-Institute-of-Robotics/bir_open_manipulator_p_with_cam_moveit.git) (master branch)
 ```sh
 git clone -b master https://github.com/Brazilian-Institute-of-Robotics/bir_open_manipulator_p_with_cam_moveit.git
 ```
-- To use OpenManipulator-PRO with a custom camera and gripper:
+- [bir_open_manipulator_p_with_gripper_cam_moveit](https://github.com/Brazilian-Institute-of-Robotics/bir_open_manipulator_p_with_gripper_cam_moveit.git) (master branch)
 ```sh
 git clone -b master https://github.com/Brazilian-Institute-of-Robotics/bir_open_manipulator_p_with_gripper_cam_moveit.git
 ```
