@@ -8,6 +8,7 @@ This repository consists of a ROS metapackage suited to the BIR (Brazilian Insti
 - [Robot Modifications](#robot-modifications)
 - [Robot arm Setup](#robot-arm-setup)
 - [Dynamixel Wizard 2.0](#dynamixel-wizard-20)
+- [MoveIt! Packages](#moveit-packages)
 - [Requirements](#requirements)
 
 ## **Robot Modifications**
@@ -94,6 +95,17 @@ dmesg
 2 - Allow your system to read your USB Port
 ```sh
 sudo chmod 666 /dev/ttyUSB0
+```
+
+## MoveIt! Packages
+To use any *MoveIt!* application for this custom model, get those repositories:
+- To use only OpenManipulator-PRO with a custom camera:
+```sh
+git clone -b master https://github.com/Brazilian-Institute-of-Robotics/bir_open_manipulator_p_with_cam_moveit.git
+```
+- To use OpenManipulator-PRO with a custom camera and gripper:
+```sh
+git clone -b master https://github.com/Brazilian-Institute-of-Robotics/bir_open_manipulator_p_with_gripper_cam_moveit.git
 ```
 
 ## **Requirements**
@@ -246,4 +258,3 @@ rosdep install --from-paths src --ignore-src -r -y
 Those commands install and update any missing requirement for your packages.
 
 **PS**: You can use this software without any ROS connection. But, if you use this software, you can not use at the same time any ROS package to communicate with your robot.
-
