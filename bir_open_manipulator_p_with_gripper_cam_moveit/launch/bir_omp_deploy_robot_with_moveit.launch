@@ -1,8 +1,0 @@
-<launch>
-    <!-- OpenManipulator-PRO Controller -->
-    <include file="$(find open_manipulator_p_controller)/launch/bir_open_manipulator_p_controller.launch">
-        <arg name="with_gripper"           value="true"/>
-        <arg name="use_moveit"             value="true"/>
-        <arg name="use_rviz"               value="false"/>
-    </include>
-</launch>
