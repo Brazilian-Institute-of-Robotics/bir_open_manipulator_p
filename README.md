@@ -97,7 +97,7 @@ dmesg
 sudo chmod 666 /dev/ttyUSB0
 ```
 
-## MoveIt! Packages
+## **MoveIt! Packages**
 To use any *MoveIt!* application for this custom model, get those repositories:
 - To use only OpenManipulator-PRO with a custom camera:
 ```sh
