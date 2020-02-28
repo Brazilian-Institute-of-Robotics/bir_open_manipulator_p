@@ -108,7 +108,7 @@
     <child link="link2"/>
     <origin xyz="0.0 0.0 0.126" rpy="0 0 0"/>
     <axis xyz="0 0 1"/>
-    <limit velocity="0.31415" effort="1000" lower="${-pi*175/180}" upper="${pi*175/180}"/>
+    <limit velocity="0.31415" effort="1000" lower="${-pi*90/180}" upper="${pi*90/180}"/>
     <dynamics damping="0.7"/>
   </joint>
 
