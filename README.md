@@ -6,6 +6,7 @@ This repository consists of a ROS metapackage suited to the BIR (Brazilian Insti
 
 ## **Summary**
 - [Robot Modifications](#robot-modifications)
+- [Joint Limits](#joint-limits)
 - [Robot arm Setup](#robot-arm-setup)
 - [Dynamixel Wizard 2.0](#dynamixel-wizard-20)
 - [MoveIt! Packages](#moveit-packages)
@@ -48,6 +49,26 @@ The support was created using [Onshape web software](https://cad.onshape.com/sig
 ### 3D Supports
 To get the files developed to create 3D supports and meshes for URDF, search in *Onshape* for:
 ![3DS](https://user-images.githubusercontent.com/32513366/73663586-a5d04400-467c-11ea-9879-e8e6e5a26cf4.png)
+
+## Joint Limits
+For correct use and seeking to eliminate possible collision accidents after the insertion of customized items (gripper and camera), it was necessary to change all the joints limits in OpenManipulator-PRO. Those limits needs to be changed in all URDF (that start with **bir_**)  located in:
+```
+/open_manipulator_p_description
+```
+and in a ```.cpp``` file (related to physical limits for your robot):
+```
+/open_manipulator_p_libs/src/bir_open_manipulator_p.cpp
+```
+The table bellow present the actual limits with important warnings related to that joint:
+| Joint Name | Min Limit | Max  Limit | Warning  |
+| --------   | --------- | ---------- | ---- |
+| Joint 1    | -90°      | +90°       | Keep in mind that a full rotation (-180° to +180°) can destroy robot power and communication physical cables |
+| Joint 2    | -90°      | +90°       | Those limits prevent a self-collision or a table collision   |
+| Joint 3    | -60°      | +120°      | It's necessary to apply -45° in ```.urdf``` pitch to match with ```.cpp``` file |
+| Joint 4    | -175°     | +175°      | ---  |
+| Joint 5    | -55°      | +55°       | Those limits are necessary to prevent a collision between the robot and camera |
+| Joint 6    | -106°     | -21°       | Those limits are necessary to prevent destruction of 24-12V Conversor physical cables  |
+| Gripper    | 0°        | 117°       | Maximum Limits to prevent a self-collision. 0° is **close** and 117° is **open** |
 
 ## Robot arm Setup
 To use correctly our customized BIR OpenManipulator-PRO (arm and modifications) you are going to need:
@@ -98,7 +119,7 @@ sudo chmod 666 /dev/ttyUSB0
 ```
 
 ## **MoveIt! Packages**
-To use any *MoveIt!* application for this custom model with a RBG Camera or Gripper with RGB Camera, get those repositories respectively:
+To use any *MoveIt!* application for this custom model with a RBG Camera or Gripper with RGB Camera, get those repositories respectively in your workspace:
 - [bir_open_manipulator_p_with_cam_moveit](https://github.com/Brazilian-Institute-of-Robotics/bir_open_manipulator_p_with_cam_moveit.git) (master branch)
 ```sh
 git clone -b master https://github.com/Brazilian-Institute-of-Robotics/bir_open_manipulator_p_with_cam_moveit.git
@@ -107,7 +128,7 @@ git clone -b master https://github.com/Brazilian-Institute-of-Robotics/bir_open_
 ```sh
 git clone -b master https://github.com/Brazilian-Institute-of-Robotics/bir_open_manipulator_p_with_gripper_cam_moveit.git
 ```
-For evaluate any *MoveIt!* planner for original model:
+To evaluate any *MoveIt!* planner for original model:
 - [bir_open_manipulator_p_moveit](https://github.com/Brazilian-Institute-of-Robotics/bir_open_manipulator_p_moveit.git) (master branch)
 ```sh
 git clone -b master https://github.com/Brazilian-Institute-of-Robotics/bir_open_manipulator_p_moveit.git
