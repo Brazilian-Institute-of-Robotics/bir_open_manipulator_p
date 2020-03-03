@@ -1,0 +1,7 @@
+<launch>
+    <!-- Launch Real World OMP -->
+    <include file="$(find open_manipulator_p_controller)/launch/bir_open_manipulator_p_controller.launch"/>
+    <!-- Launch Joy node -->
+    <node name="joy_node" pkg="joy" type="joy_node"/>
+
+</launch>

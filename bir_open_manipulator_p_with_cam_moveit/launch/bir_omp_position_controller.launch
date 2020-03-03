@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<launch>
+  <!-- Load Joint controller configurations from YAML file to parameter server -->
+  <rosparam file="$(find bir_open_manipulator_p_with_cam_moveit)/config/bir_omp_position_controller.yaml" 
+            command="load"/>
+
+  <!-- load the controller list -->
+  <node pkg="controller_manager" type="spawner" 
+        name="controller_spawner" 
+        respawn="false"	output="screen" 
+        ns="/open_manipulator_p"
+		    args="joint_state_controller omp_controller"/>
+  
+</launch>

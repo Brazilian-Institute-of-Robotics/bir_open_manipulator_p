@@ -1,0 +1,39 @@
+<launch>
+  <!-- gazebo_ros_control PID commands-->
+  <rosparam file="$(find bir_open_manipulator_p_with_cam_moveit)/config/bir_omp_PID_gains.yaml" command="load"/>
+  
+  <!-- These are the arguments you can pass this launch file, for example paused:=true -->
+  <arg name="use_robot_name" default="open_manipulator_p"
+       doc="Must match the robotNamespace tag in the gazebo description file"/>
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>
+  <arg name="headless" default="false"/>
+  <arg name="debug" default="false"/>
+
+  <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find open_manipulator_p_gazebo)/worlds/empty.world"/>
+    <arg name="debug" value="$(arg debug)" />
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+    <arg name="headless" value="$(arg headless)"/>
+  </include>
+
+  <!-- Load the URDF into the ROS Parameter Server -->
+    <param name="robot_description"
+           command="$(find xacro)/xacro --inorder '$(find open_manipulator_p_description)/urdf/bir_open_manipulator_p_with_cam.urdf.xacro'"/>
+
+  <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+        args="-urdf -model open_manipulator_p -z 0.0 -param robot_description"/>
+
+  <!-- Spawn cube tag 00001 -->
+  <node name="urdf_spawner_tag" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+    args="-file $(find bir_open_manipulator_p_with_cam_moveit)/apriltags/urdf/tag25_09_00001.urdf -urdf -x 3.11 -y -6.67 -z 0.15 -R 0.0 -P 0.0 -Y 0.52 -model tag250900001"/>
+
+  <!-- ros_control controllers manipulator launch file -->
+  <include file="$(find bir_open_manipulator_p_with_cam_moveit)/launch/bir_omp_position_controller.launch" />
+
+</launch>
