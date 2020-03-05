@@ -16,11 +16,12 @@ class RealTimePlot():
         self.fig, self.ax = plt.subplots(nrows=1, ncols=1)                  # Figure and axes to plot our real time data and use in class RTP
         # PLOT PARAMETERS
         self.fig.canvas.set_window_title('Real Time Plot')                  # Define Window name
-        # USEFUL VARIABLES
+        # PLOT VARIABLES
         self.axis_command = []                                  # Time axis
         self.axis_x_commander = []                              # Controller axis X to plot 
         self.axis_y_commander = []                              # Controller axis Y to plot
         self.axis_z_commander = []                              # Controller axis Z to plot
+        self.START_PLOT = 0
         # INIT NODE
         rospy.init_node('real_time_plotting_end_effector')
         # DEFINE SUBSCRIBER TO GET VALUES
@@ -29,19 +30,23 @@ class RealTimePlot():
     # CALLBACK - GET EE VALUES
     def cb(self, data):
         if data.orientation.x != 99.0:
-            self.axis_command.append(next(self.timer_count)+1)
-            self.axis_x_commander.append(data.position.x)
-            self.axis_y_commander.append(data.position.y)
-            self.axis_z_commander.append(data.position.z)
+            self.axis_x = data.position.x
+            self.axis_y = data.position.y
+            self.axis_z = data.position.z
+            self.START_PLOT = 1
 
     # FUNCTION - ATUALIZE PLOT DATA WITH JOINTS VALUES in DEGREES
     def atualize_data(self, i):
-        if not rospy.is_shutdown():
+        if not rospy.is_shutdown() and self.START_PLOT == 1:
+            self.axis_command.append(next(self.timer_count)*self.PERIOD_INFO/1000)
+            self.axis_x_commander.append(self.axis_x)
+            self.axis_y_commander.append(self.axis_y)
+            self.axis_z_commander.append(self.axis_z)
             # PLOT XYZ
             self.ax.cla()
             self.ax.set_title('Movimento da Ferramenta no plano XYZ', fontsize = 10)
             self.ax.set_ylabel('Valor')
-            self.ax.set_xlabel('Comandos')
+            self.ax.set_xlabel('Tempo [segundos]')
             self.ax.tick_params(labelsize=6)
             self.ax.plot(self.axis_command, self.axis_x_commander, label= "Eixo X")
             self.ax.plot(self.axis_command, self.axis_y_commander, label= "Eixo Y")

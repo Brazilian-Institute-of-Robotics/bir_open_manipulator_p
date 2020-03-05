@@ -27,7 +27,7 @@ class openManipulatorPRO:
         self.display_trajectory_publisher = rospy.Publisher('/move_group/display_planned_path', DisplayTrajectory,queue_size=20)
         # Publisher/Subscriber
         self.joystick_subscriber = rospy.Subscriber('/joy', Joy, self.joystickCallback, queue_size=10)
-        self.end_effector_publisher = rospy.Publisher('/end_effector_axes_pose', Pose, queue_size=10, latch=True)
+        self.end_effector_publisher = rospy.Publisher('/end_effector_axes_pose', Pose, queue_size=10)
         # MoveIt - Vars for End Effector
         self.ee_name = self.group.get_end_effector_link()
         # MoveIt - Restrictions
@@ -122,7 +122,8 @@ class openManipulatorPRO:
         -Z -> LT
         '''
         # Go to a start pose
-        self.goToNamedPose(pose_name='pHome')
+        self.goToNamedPose(pose_name='pCatch')
+        self.publishEndEffectorPose(axis=0.0)
         rospy.loginfo('Wait for joy commands ...')
         # Commander Loop
         while not rospy.is_shutdown():
