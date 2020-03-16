@@ -11,6 +11,8 @@ This repository consists of a ROS metapackage suited to the BIR (Brazilian Insti
 - [Dynamixel Wizard 2.0](#dynamixel-wizard-20)
 - [MoveIt! Packages](#moveit-packages)
 - [Requirements](#requirements)
+- [Improvements](#improvements)
+- [Minor issues](#minor-issues)
 
 ## **Robot Modifications**
 OpenManipulator-PRO is a robot arm composed by 6 revolute joints, where each is a Dynamixel PRO:
@@ -207,3 +209,37 @@ rosdep install --from-paths src --ignore-src -r -y
 Those commands install and update any missing requirement for your packages.
 
 **PS**: You can use this software without any ROS connection. But, if you use this software, you can not use at the same time any ROS package to communicate with your robot.
+
+## **Improvements**
+This repository, as your MoveIt! packages have a lot of possibilities to improve more OpenManipulator-PRO development as:
+- [ ] Rewrite all codes in MoveIt! packages based on [Python google code style](http://google.github.io/styleguide/pyguide.html). To Improve readability over current and future codes.
+- [ ] Develop a **STOP button** capable to interrupt OpenManipulator-PRO MoveIt! execution in real world. Keep in my mind the problems that OpenManipulator-PRO has with MoveIt!
+- [ ] Develop a python code file to work as a library to basic MoveIt! functions to control OpenManipulator-PRO through MoveIt!. This is necessary because most of the codes developed in any MoveIt! package here presents the same structure.
+
+## **Minor issues**
+In this repository, working with OpenManipulator-PRO, there are several minor issues to fix (most related to visual effects and communication):
+- [ ] Visualizing OpenManipulator-PRO with gripper and camera URDF in *RViz* shows a second camera floating over the space. It is necessary to eliminate it!
+    - **Issue type**: Visual
+    - **Additional info**: Could be a bug in meshe file.
+- [ ] Gripper and Camera meshes don't present texture in *Gazebo*. Should be solved to present the same visual as in *Rviz*.
+    - **Issue type**: Visual
+    - **Additional info**: ---
+- [ ] Change meshe file for gripper to be presented in *Gazebo* as the same in Real world.
+    - **Issue type**: Visual and Mechanical
+    - **Additional info**: There are two angular lag: Joint 6 with 3D base and 3D base with Gripper. This angular lag prevent the simulation to show the same results as in real world. For the first lag, it is recommended to change URDF and for the second one to fix in ```.dae``` file the lag.
+- [ ] Discover and solve why USB communication with OpenManipulator-PRO some times just drop randomly
+    - **Issue type**: Communication
+    - **Additional info**: Some times, without any warning, the robot communication will drop. Could be the higher actual baud rate on every Dynamixels connected, USB port (2.0 vs 3.0) or a cable problem because this problem was verify in different computers.
+- [ ] Discover and solve why teledyne RGB camera communication some times just drop randomly
+    - **Issue type**: Communication
+    - **Additional info**: Could be the RJ-45 cable fixation (it's connection is physically unstable), camera higher resolution or FPS.
+- [ ] Discover why MoveIt! can not control the gripper in Real world tasks.
+    - **Issue**: Communication/Technical
+    - **Additional info**: Actually, to control the gripper in real world is necessary to use a ROS service. Besides that, MoveIt! is unable to control the gripper despite sending the commands. In simulation, the control works perfectly.
+- [ ] Understand why MoveIt! sequential execution does not work properly in real world, despite working in *Gazebo*.
+    - **Issue**: Technical
+    - **Additional info**: The main problem here (the most important) is that MoveIt! in python does not respect the argument **wait=True** in ```.go``` function. This cause a communication problem, where different positions are executed at the same time. Nowadays, this problem was fixed based in a loop comparison over target state and joint actual state, but is not the ideal. 
+- [ ] Discover and solve why there are tons of warnings about Control time using OpenManipulator-PRO (remove those warnings if possible)
+    - **Issue**: Communication
+    - **Additional info**: The argument related to this can be found in ```./open_manipulator_p_controller/src/bir_open_manipulator_p_controller.cpp``` as ```control_period_``` variable and in ```./open_manipulator_p_controller/launch/bir_open_manipulator_p_controller.launch``` as ```control_period``` parameter.
+    
