@@ -217,7 +217,7 @@ This repository, as your MoveIt! packages have a lot of possibilities to improve
 - [ ] Develop a python code file to work as a library to basic MoveIt! functions to control OpenManipulator-PRO through MoveIt!. This is necessary because most of the codes developed in any MoveIt! package here presents the same structure.
 
 ## **Minor issues**
-In this repository, working with OpenManipulator-PRO, there are several minor issues to fix (most related to visual effects and communication):
+In this repository there are several minor issues to fix (most related to visual effects and communication):
 - [ ] Visualizing OpenManipulator-PRO with gripper and camera URDF in *RViz* shows a second camera floating over the space. It is necessary to eliminate it!
     - **Issue type**: Visual
     - **Additional info**: Could be a bug in meshe file.
