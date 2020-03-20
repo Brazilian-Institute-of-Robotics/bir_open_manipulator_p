@@ -1,4 +1,4 @@
-# Package for OpenMANIPULATOR-PRO to XYZ Control with Joystick
+# Package for Joystick control over OpenMANIPULATOR-PRO Joints
 
 Package to control the manipulator using a XBOX360 joystick with graphical visualization in python.
 
