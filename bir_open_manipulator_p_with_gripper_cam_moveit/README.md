@@ -219,7 +219,7 @@ rosrun joy joy_node
 
 - Run task routine
 ```
-rosrun bir_open_manipulator_p_with_gripper_cam_moveit bir_omp_end_effector_joystick_control.py
+rosrun bir_open_manipulator_p_with_gripper_cam_moveit bir_omp_end_effector_xyz_joystick_control.py
 ```
 
 ## **Package Notes**
