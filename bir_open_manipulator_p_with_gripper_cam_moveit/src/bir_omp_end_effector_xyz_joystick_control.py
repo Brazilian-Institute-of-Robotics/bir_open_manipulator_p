@@ -27,7 +27,7 @@ class openManipulatorPRO:
         self.display_trajectory_publisher = rospy.Publisher('/move_group/display_planned_path', DisplayTrajectory,queue_size=20)
         # Publisher/Subscriber
         self.joystick_subscriber = rospy.Subscriber('/joy', Joy, self.joystickCallback, queue_size=10)
-        self.end_effector_publisher = rospy.Publisher('/end_effector_axes_pose', Pose, queue_size=10)
+        self.end_effector_publisher = rospy.Publisher('/end_effector_axes_pose', Pose, queue_size=10, latch=True)
         # MoveIt - Vars for End Effector
         self.ee_name = self.group.get_end_effector_link()
         # MoveIt - Restrictions
@@ -59,7 +59,7 @@ class openManipulatorPRO:
         pub_ee_pose.orientation.x = axis # Axis that you controlled
         pub_ee_pose.orientation.y = MOVEIT_POSE_TOLERANCE # Moveit Tolerance
         self.end_effector_publisher.publish(pub_ee_pose)
-        pub_ee_pose.orientation.x = 99.0
+        pub_ee_pose.orientation.x = 99.0                  # For plot decision (command or time)
         self.end_effector_publisher.publish(pub_ee_pose)
 
     def goToNamedPose(self, pose_name):

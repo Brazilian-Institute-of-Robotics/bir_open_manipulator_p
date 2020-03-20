@@ -15,7 +15,7 @@ class RealTimePlot():
         self.timer_count = count()                                          # Timer count to keep all variables at the same cycle/time
         self.fig, self.ax = plt.subplots(nrows=1, ncols=1)                  # Figure and axes to plot our real time data and use in class RTP
         # PLOT PARAMETERS
-        self.fig.canvas.set_window_title('Real Time Plot')                  # Define Window name
+        self.fig.canvas.set_window_title('Real Time Plot - Time')                  # Define Window name
         # PLOT VARIABLES
         self.axis_command = []                                  # Time axis
         self.axis_x_commander = []                              # Controller axis X to plot 
@@ -23,7 +23,7 @@ class RealTimePlot():
         self.axis_z_commander = []                              # Controller axis Z to plot
         self.START_PLOT = 0
         # INIT NODE
-        rospy.init_node('real_time_plotting_end_effector')
+        rospy.init_node('real_time_plotting_end_effector_time')
         # DEFINE SUBSCRIBER TO GET VALUES
         self.end_effector_subscriber =  rospy.Subscriber('/end_effector_axes_pose',
                                                         Pose, self.cb, queue_size=10)
