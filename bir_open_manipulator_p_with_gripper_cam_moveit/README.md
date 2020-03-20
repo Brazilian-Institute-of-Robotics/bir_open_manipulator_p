@@ -191,7 +191,7 @@ rosrun bir_open_manipulator_p_with_gripper_cam_moveit bir_omp_catch_realWorld2.p
 ### **2. Move end effector in XYZ**
 This task propose to movement the gripper in X, Y or Z through joystick, creating a response graph.
 
-#### Simulation - Rviz
+#### Rviz
 - Initialize joystick communication
 ```
 sudo xboxdrv --detach-kernel-driver
