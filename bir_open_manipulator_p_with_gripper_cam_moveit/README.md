@@ -204,15 +204,24 @@ roslaunch bir_open_manipulator_p_with_gripper_cam_moveit demo.launch
 ```
 rosrun joy joy_node
 ```
+- Run Response graph
+
+    There are two options for response graph: **time** and **command**. In the first option will have a response with X-axis in time, in the second will have a response with X-axis in commands (related to how many commands you send to OpenManipulator-PRO).
+
+    - Run response graph in **time**
+        ```
+        rosrun bir_open_manipulator_p_with_gripper_cam_moveit bir_omp_plot_end_effector_xyz_time.py
+        ```
+    - Or run response graph in **command**
+        ```
+        rosrun bir_open_manipulator_p_with_gripper_cam_moveit bir_omp_plot_end_effector_xyz_command.py
+        ```
+
 - Run task routine
 ```
 rosrun bir_open_manipulator_p_with_gripper_cam_moveit bir_omp_end_effector_joystick_control.py
 ```
-- Run response graph
-```
-rosrun bir_open_manipulator_p_with_gripper_cam_moveit bir_omp_plot_end_effector_xyz.py
-```
 
-## **Notes**
+## **Package Notes**
 - Until now, to control physically the gripper is necessary to use a **service/client** and not MoveIt!. However, in simulation MoveIt! can control the gripper properly.
 - If you see any strange movement in your manipulator during simulation, note that this simulation is using PID controller in ros_control.
