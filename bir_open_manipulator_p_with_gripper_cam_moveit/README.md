@@ -222,6 +222,18 @@ rosrun joy joy_node
 rosrun bir_open_manipulator_p_with_gripper_cam_moveit bir_omp_end_effector_xyz_joystick_control.py
 ```
 
+### **3. MoveIt! Benchmark for Developed model**
+This task evaluate a series of planners from OMPL library for the given URDF model.
+
+#### Benchmark
+- Run the process
+```
+roslaunch bir_open_manipulator_p_with_gripper_cam_moveit bir_omp_benchmark.launch
+```
+And wait for the results (depends on your config, the process can take a long time to finish).
+
+**PS**: For more info related to how to change benchmark configuration, scenes, robot positions and generate graphical results acess this [README](https://github.com/Brazilian-Institute-of-Robotics/bir_open_manipulator_p/tree/master/bir_open_manipulator_p_moveit) that contains all process related to develop a Benchmark evaluation.
+
 ## **Package Notes**
 - Until now, to control physically the gripper is necessary to use a **service/client** and not MoveIt!. However, in simulation MoveIt! can control the gripper properly.
 - If you see any strange movement in your manipulator during simulation, note that this simulation is using PID controller in ros_control.

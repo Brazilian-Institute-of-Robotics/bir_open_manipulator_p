@@ -1,0 +1,52 @@
+# Three different planners from OMPL are run a total of 100 times each, with a
+# maximum of 5 seconds per run.  Output is stored in the /tmp/moveit_benchmarks directory.
+
+benchmark_config:
+    warehouse:
+        host: 127.0.0.1
+        port: 33829
+        scene_name: benchmark_scene    # Required
+    parameters:
+        name: benchOMP
+        runs: 100
+        group: arm       # Required
+        timeout: 2.5
+        output_directory: /tmp/moveit_benchmarks/omp
+        queries: 
+            - query_1
+            - query_2
+            - query_3
+
+            ## Could be a bug, but the benchmark.launch ignores the queries here and test every query in the scene
+            ## Independent that is here or not
+        start_states: start_state
+    planners:
+        - plugin: ompl_interface/OMPLPlanner
+          planners:
+            - EST
+            - RRT
+            - RRTConnect
+            - RRTstar
+            - TRRT
+            - PRM
+            - PRMstar
+            - FMT
+            - BiTRRT
+            - BiEST
+            - LazyPRM
+            - LazyPRMstar
+            - SPARS
+            - SPARStwo
+            
+            #!!! PLANNERS OUT GIVEN ERROR !!!
+            #- SBLkConfigDefault    
+            #- ProjESTkConfigDefault
+            #- LBTRRTkConfigDefault
+            #- BFMTkConfigDefault
+            #- PDSTkConfigDefault
+            #- STRIDEkConfigDefault
+            #- LBKPIECEkConfigDefault
+            #- BKPIECEkConfigDefault
+            #- KPIECEkConfigDefault
+                    
+            ## ERROR - 0 default projection is set. Perhaps setup() needs to be called
