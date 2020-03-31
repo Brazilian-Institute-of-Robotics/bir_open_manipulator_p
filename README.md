@@ -220,7 +220,7 @@ This repository, as your MoveIt! packages have a lot of possibilities to improve
 In this repository there are several minor issues to fix (most related to visual effects and communication):
 - [ ] Visualizing OpenManipulator-PRO with gripper and camera URDF in *RViz* shows a second camera floating over the space. It is necessary to eliminate it!
     - **Issue type**: Visual
-    - **Additional info**: Could be a bug in meshe file.
+    - **Additional info**: Could be a bug in Collision meshe (not placed correct).
 - [ ] Gripper and Camera meshes don't present texture in *Gazebo*. Should be solved to present the same visual as in *Rviz*.
     - **Issue type**: Visual
     - **Additional info**: ---
