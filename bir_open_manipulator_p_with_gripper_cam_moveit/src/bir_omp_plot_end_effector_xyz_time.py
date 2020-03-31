@@ -45,7 +45,7 @@ class RealTimePlot():
             # PLOT XYZ
             self.ax.cla()
             self.ax.set_title('Movimento da Ferramenta no plano XYZ', fontsize = 10)
-            self.ax.set_ylabel('Valor')
+            self.ax.set_ylabel('Valor [m]')
             self.ax.set_xlabel('Tempo [segundos]')
             self.ax.tick_params(labelsize=6)
             self.ax.plot(self.axis_command, self.axis_x_commander, label= "Eixo X")
