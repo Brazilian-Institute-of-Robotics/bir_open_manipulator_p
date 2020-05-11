@@ -1,0 +1,23 @@
+<launch>
+  <!-- benchmark options file -->
+  <arg name="bench_opts" default="$(find bir_open_manipulator_p_moveit)/config/bir_omp_benchmark_settings.yaml"/>
+
+  <!-- Load robot settings -->
+  <include file="$(find bir_open_manipulator_p_moveit)/launch/planning_context.launch">
+    <arg name="load_robot_description" value="true"/>
+  </include>
+
+  <!-- Load all planning pipelines that will be benchmarked -->
+  <include ns="moveit_run_benchmark" file="$(find bir_open_manipulator_p_moveit)/launch/planning_pipeline.launch.xml">
+    <arg name="pipeline" value="ompl" />
+  </include>
+
+  <!-- Load warehouse containing scenes and queries to benchmark -->
+  <include file="$(find bir_open_manipulator_p_moveit)/launch/default_warehouse_db.launch" />
+
+  <!-- Launch benchmark node -->
+  <node name="moveit_run_benchmark" pkg="moveit_ros_benchmarks" type="moveit_run_benchmark" output="screen" required="true">
+    <rosparam command="load" file="$(arg bench_opts)"/>
+  </node>
+
+</launch>

@@ -60,6 +60,11 @@ add_executable(open_manipulator_p_controller src/open_manipulator_p_controller.c
 add_dependencies(open_manipulator_p_controller ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(open_manipulator_p_controller ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 
+# Include BIR executable
+add_executable(bir_open_manipulator_p_controller src/bir_open_manipulator_p_controller.cpp)
+add_dependencies(bir_open_manipulator_p_controller ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(bir_open_manipulator_p_controller ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+
 ################################################################################
 # Install
 ################################################################################

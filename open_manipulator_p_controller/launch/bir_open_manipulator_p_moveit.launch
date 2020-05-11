@@ -1,0 +1,73 @@
+<launch>
+  <arg name="robot_name"              default="open_manipulator_p"/>
+  <arg name="sample_duration"         default="0.010"/>
+  <arg name="with_gripper"            default="false"/>
+  <arg name="debug"                   default="false" />
+  <arg name="moveit_package"          default="bir_open_manipulator_p_with_cam_moveit"/>
+  <arg name="moveit_gripper_package"  default="bir_open_manipulator_p_with_gripper_cam_moveit"/>
+  <arg name="use_rviz"                default="false"/>
+
+  <!-- We do not have a robot connected, so publish fake joint states -->
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+    <param name="/use_gui" value="false"/>
+    <rosparam param="source_list" subst_value="true">["$(arg robot_name)/joint_states"]</rosparam>
+  </node>
+
+  <!-- Given the published joint states, publish tf for the robot links -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="true" output="screen" />
+
+  <!-- MOVEIT WITH GRIPPER -->
+  <group if="$(arg with_gripper)">
+    <!-- Load the URDF, SRDF and other .yaml configuration files on the param server -->
+    <include file="$(eval find(moveit_gripper_package) + '/launch/planning_context.launch')">
+      <arg name="load_robot_description" value="true"/>
+    </include>
+
+    <!-- Run the main MoveIt executable without trajectory execution (we do not have controllers configured by default) -->
+    <include file="$(eval find(moveit_gripper_package) + '/launch/move_group.launch')">
+      <arg name="allow_trajectory_execution" value="false"/>
+      <arg name="fake_execution" value="false"/>
+      <arg name="info" value="false"/>
+      <arg name="debug" value="$(arg debug)"/>
+      <!-- <arg name="sample_duration" value="$(arg sample_duration)"/> -->
+    </include>
+
+    <!-- IF you want to use RViz GUI -->
+    <group if="$(arg use_rviz)">
+      <!-- Run Rviz and load the default config to see the state of the move_group node -->
+      <include file="$(eval find(moveit_gripper_package) + '/launch/moveit_rviz.launch')">
+        <!--<arg name="config" value="true"/>-->
+        <arg name="debug" value="$(arg debug)"/>
+      </include>
+    </group>
+  
+  </group>
+
+  <!-- MOVEIT WITHOUT GRIPPER -->
+  <group unless="$(arg with_gripper)">
+    <!-- Load the URDF, SRDF and other .yaml configuration files on the param server -->
+    <include file="$(eval find(moveit_package) + '/launch/planning_context.launch')">
+      <arg name="load_robot_description" value="true"/>
+    </include>
+
+    <!-- Run the main MoveIt executable without trajectory execution (we do not have controllers configured by default) -->
+    <include file="$(eval find(moveit_package) + '/launch/move_group.launch')">
+      <arg name="allow_trajectory_execution" value="false"/>
+      <arg name="fake_execution" value="false"/>
+      <arg name="info" value="false"/>
+      <arg name="debug" value="$(arg debug)"/>
+      <!-- <arg name="sample_duration" value="$(arg sample_duration)"/> -->
+    </include>
+    
+    <!-- IF you want to use RViz GUI -->
+    <group if="$(arg use_rviz)">
+      <!-- Run Rviz and load the default config to see the state of the move_group node -->
+      <include file="$(eval find(moveit_package) + '/launch/moveit_rviz.launch')">
+        <!--<arg name="config" value="true"/>-->
+        <arg name="debug" value="$(arg debug)"/>
+      </include>
+    </group>
+
+  </group>
+
+</launch>

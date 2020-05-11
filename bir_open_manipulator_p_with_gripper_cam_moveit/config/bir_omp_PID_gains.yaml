@@ -1,0 +1,29 @@
+/open_manipulator_p/gazebo_ros_control/pid_gains:
+    joint1:
+        p: 9000.0
+        i: 0.1
+        d: 500.0
+    joint2:
+        p: 9000.0
+        i: 0.1
+        d: 500.0
+    joint3:
+        p: 6000.0
+        i: 0.1
+        d: 400.0
+    joint4:
+        p: 6000.0
+        i: 0.1
+        d: 400.0
+    joint5:
+        p: 6000.0
+        i: 0.1
+        d: 400.0
+    joint6:
+        p: 6000.0
+        i: 0.1
+        d: 400.0
+    #gripper:
+    #    p: 6000.0
+    #    i: 0.1
+    #    d: 400.0
